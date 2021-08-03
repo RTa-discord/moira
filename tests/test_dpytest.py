@@ -18,5 +18,5 @@ async def test_neko(bot: MyTestableBot):
 @pytest.mark.asyncio
 async def test_ping(bot: MyTestableBot):
     guild: discord.Guild = bot.guilds[0]
-    await dpytest.message("/ping")
+    await dpytest.message("/pingtes")
     assert dpytest.verify().message().contains().content("pong!")
