@@ -2,6 +2,6 @@
 
 
 # License
-[Original]
-  [Being24/hofumi](https://github.com/being24/hofumi/)
-  MIT  2019 (c) Being24
+[Original]  
+  [Being24/hofumi](https://github.com/being24/hofumi/)  
+  MIT  2019 (c) Being24  
