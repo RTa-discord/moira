@@ -1,7 +1,14 @@
+import aiohttp
+import discord
+from discord import Forbidden
+
 from discord.ext import commands
 import time
 import traceback
+import asyncio
 import os
+
+ret = {}
 
 class Admin(commands.Cog, name='管理用コマンド群'):
     """
@@ -37,6 +44,33 @@ class Admin(commands.Cog, name='管理用コマンド群'):
         """そのサーバーに何人いるかを確認する関数
         """
         await ctx.reply(f"{ctx.guild.member_count}", mention_author=False)
+
+    @commands.command(hidden=True, name="exec")
+    @commands.is_owner()
+    async def _exec(self, ctx, *, script):
+        script = script.removeprefix("```py").removesuffix("```")
+        async with aiohttp.ClientSession() as session:
+            ret[ctx.message.id] = ""
+
+            async def get_msg(url):
+                return await commands.MessageConverter().convert(ctx, url)
+
+            def _print(*txt):
+                ret[ctx.message.id] += " ".join(map(str, txt)) + "\n"
+            exec(
+                'async def __ex(self,_bot,_ctx,ctx,session,print,get_msg): '
+                + '\n'.join(f'    {l}' for l in script.split('\n'))
+            )
+            r = await locals()['__ex'](self, self.bot, ctx, ctx, session, _print, get_msg)
+        try:
+            if ret[ctx.message.id]:
+                await ctx.send(f"stdout:```py\n{str(ret[ctx.message.id])[:1980]}\n```".replace(self.bot.http.token, "[Token]"))
+            if r:
+                await ctx.send(f"return:```py\n{str(r)[:1980]}\n```".replace(self.bot.http.token, "[Token]"))
+        except BaseException:
+            pass
+        await ctx.message.add_reaction("\U0001f44d")
+        del ret[ctx.message.id]
 
 def setup(bot):
     bot.add_cog(Admin(bot))
