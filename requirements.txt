@@ -1,20 +1,12 @@
 requests==2.25.1
 pytz==2021.1
 dataclasses
-<<<<<<< HEAD
-discord==1.7.3
-=======
->>>>>>> bfb941acf8735ea4bfecbc15e7d8bbe8169444a6
 python-dotenv==0.18.0
 git+https://github.com/Rapptz/discord.py
 git+https://github.com/redParrot17/discord-ext-fancy-help
 git+https://github.com/Rapptz/discord-ext-menus
 discord-ext-ui
-<<<<<<< HEAD
-dpy-components~=0.2.3
-=======
 dpy-components
 tzlocal
 aiosqlite==0.17.0
 SQLAlchemy==1.4.22
->>>>>>> bfb941acf8735ea4bfecbc15e7d8bbe8169444a6
