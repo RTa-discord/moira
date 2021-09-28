@@ -50,6 +50,7 @@ class Dropdown(discord.ui.Select):
         options = [
             discord.SelectOption(label='Red', description='Your favourite colour is red', emoji='🟥'),
             discord.SelectOption(label='Green', description='Your favourite colour is green', emoji='🟩'),
+            discord.SelectOption(label='yellow', description='Your favourite colour is yellow', emoji='🟨',),
             discord.SelectOption(label='Blue', description='Your favourite colour is blue', emoji='🟦')
         ]
         super().__init__(placeholder='Choose your favourite colour...', min_values=1, max_values=1, options=options)
